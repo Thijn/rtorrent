@@ -1,4 +1,4 @@
-module github.com/mdlayher/rtorrent
+module github.com/Thijn/rtorrent
 
 go 1.13
 
