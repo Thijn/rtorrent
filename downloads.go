@@ -1,8 +1,10 @@
 package rtorrent
 
-import "net"
-import "net/url"
-import "strings"
+import (
+	"net"
+	"net/url"
+	"strings"
+)
 
 const (
 	// downloadList is used in methods which retrieve a list of downloads.
@@ -68,7 +70,7 @@ func (s *DownloadService) BaseFilename(infoHash string) (string, error) {
 // TrackerDomain retrieves the domain name of the first tracker for a specific
 // download, by its info-hash.
 func (s *DownloadService) TrackerDomain(infoHash string) (string, error) {
-	u, err := s.c.getStringAtIndex("t.get_url", infoHash, 0)
+	u, err := s.c.getStringAtIndex("t.url", infoHash, 0)
 	if err != nil {
 		return u, err
 	}
@@ -95,7 +97,7 @@ func (s *DownloadService) DownloadRate(infoHash string) (int, error) {
 // DownloadTotal retrieves the current download total in bytes for a specific
 // download, by its info-hash.
 func (s *DownloadService) DownloadTotal(infoHash string) (int, error) {
-	return s.c.getInt("d.get_down_total", infoHash)
+	return s.c.getInt("d.down.total", infoHash)
 }
 
 // UploadRate retrieves the current upload rate in bytes for a specific
@@ -107,5 +109,5 @@ func (s *DownloadService) UploadRate(infoHash string) (int, error) {
 // UploadTotal retrieves the current upload total in bytes for a specific
 // download, by its info-hash.
 func (s *DownloadService) UploadTotal(infoHash string) (int, error) {
-	return s.c.getInt("d.get_up_total", infoHash)
+	return s.c.getInt("d.up.total", infoHash)
 }
